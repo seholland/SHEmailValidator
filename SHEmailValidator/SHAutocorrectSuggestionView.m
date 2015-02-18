@@ -167,6 +167,9 @@ static const NSInteger kDismissButtonWidth = 30;
     [self.suggestedText drawInRect:self.suggestionRect withFont:self.suggestionFont lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentLeft];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{};
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{};
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{};
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (touches.count == 1) {
