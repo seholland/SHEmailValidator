@@ -161,10 +161,26 @@ static const NSInteger kDismissButtonWidth = 30;
     CGContextStrokePath(context);
     
     [self.titleColor set];
-    [self.title drawInRect:self.titleRect withFont:self.titleFont lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentCenter];
+    
+    /// Make a copy of the default paragraph style
+    NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    /// Set line break mode
+    paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    /// Set text alignment
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    NSDictionary *attributes = @{ NSFontAttributeName: self.titleFont,
+                        NSParagraphStyleAttributeName: paragraphStyle };
+    [self.title drawInRect:self.titleRect withAttributes:attributes];
     
     [self.suggestionColor set];
-    [self.suggestedText drawInRect:self.suggestionRect withFont:self.suggestionFont lineBreakMode:NSLineBreakByCharWrapping alignment:NSTextAlignmentLeft];
+    paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    /// Set line break mode
+    paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping;
+    /// Set text alignment
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    attributes = @{ NSFontAttributeName: self.suggestionFont,
+                        NSParagraphStyleAttributeName: paragraphStyle };
+    [self.suggestedText drawInRect:self.suggestionRect withAttributes:attributes];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{};
